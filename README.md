@@ -4,8 +4,8 @@ mon songo final multijoueur   officiel
 #lancement
 1.ouvrir le terminal dans le dossier nommé backend
 2.assurer vous d avoir une connexion internet active et faites un npm install 
-2.puis npm install cors puis npm install nodemon --save-dev
-3.lancez le serveur avec la commande : npm run dev
+2.puis npm install cors 
+3.lancez le serveur avec la commande : npm run start
 4.ouvrez votre navigateur et tapez: http://localhost:3000/
 5.jouez!! en vous basant sur les règles ci dessous
 mon jeu songo multijoueur enprogrammation web....
