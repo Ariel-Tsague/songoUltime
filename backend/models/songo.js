@@ -75,18 +75,27 @@ class Songo {
 
         let pointsGagnes = 0;
         let casesACompleter = [];
+        let compte=0;
 
         if (camp === 1 && idJ === 2) {
             while (index >= 0 && this.coteJoueur1[index] > 0 && this.coteJoueur1[index] < 4) {
                 pointsGagnes += this.coteJoueur1[index];
                 casesACompleter.push({ camp: 1, idx: index });
+                compte++;
                 index--;
+            }
+            if(compte>1){
+                alert(`wow!! prise en chaine de ${pointsGagnes}`);
             }
         } else if (camp === 2 && idJ === 1) {
             while (index <= 6 && this.coteJoueur2[index] > 0 && this.coteJoueur2[index] < 4) {
                 pointsGagnes += this.coteJoueur2[index];
                 casesACompleter.push({ camp: 2, idx: index });
+                compte++;
                 index++;
+            }
+            if(compte>1){
+                alert(`wow!! prise en chaine de ${pointsGagnes}`);
             }
         }
 
