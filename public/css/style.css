@@ -317,6 +317,7 @@ PANNEAU DE DROITE (Scores)
         0 4px 6px rgba(0, 0, 0, 0.4);
     border: 2px solid #160b05;
     position: relative;
+    padding:6px;
 }
 
 /* effet au survol */
@@ -339,19 +340,6 @@ PANNEAU DE DROITE (Scores)
     bottom: 10px;
     right: 12px;
     box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.9);
-}
-
-/* deuxieme bille pour donner du relief */
-.case::before {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: radial-gradient(circle at 35% 35%, #ffe169, #ffb703 50%, #945c00 100%);
-    border-radius: 50%;
-    top: 12px;
-    left: 14px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
 }
 
 .txtScore { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }
