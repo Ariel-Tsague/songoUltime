@@ -1,9 +1,9 @@
+require('dotenv').config(); // Charge les variables du fichier .env
 const express = require('express');
 const path = require('path');
 const songoRouter = require('./routes/songoRoutes');
 
 const app = express();
-const PORT = 3000;
 
 // 1. Middlewares de configuration
 app.use(express.json());
@@ -20,6 +20,8 @@ app.get('/', (req, res) => {
 });
 
 // 5. Lancement de l'écoute du serveur
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-    console.log(`Serveur Songo actif sur : http://localhost:${PORT}`);
+    console.log(`Serveur Songo lancé sur le port ${PORT}`);
 });
