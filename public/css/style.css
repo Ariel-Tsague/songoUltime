@@ -1,621 +1,391 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+    --bg-main: #0f1115;
+    --bg-side: #161920;
+    --bg-card: #1f242e;
+    --accent: #ff9f1c; 
+    --accent-hover: #ffb703;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --success: #10b981;
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-}
-
-h1 {
-    background-color: rgba(247, 211, 10, 0.105);
-    color: green;
-    text-align: center;
-    text-shadow: 0 20px 15px rgba(183, 124, 135, 1);
-}
-
-#regles:hover {
-    scale: 1.3;
-    background-color: green;
-    transition-duration: 0.3s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
-    background-color: #2e2e30;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.3) 20%, transparent 20%), radial-gradient(rgba(0, 0, 0, 0.3) 20%, transparent 20%);
-    background-size: 8px 8px;
-    background-position: 0 0, 4px 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--bg-main);
+    color: var(--text-main);
     min-height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
-    opacity: 1;
-}
-
-body h2 {
-    background-color: black;
-    border-radius: 40px;
-    padding: 30px;
-    color: white;
-    margin-left: 80px;
-    margin-right: 20px;
-}
-
-#container {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-}
-
-body h1 {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 50px;
-}
-
-#int {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(122, 184, 202);
-    margin: 10px;
-}
-
-#pre {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(122, 202, 197);
-    margin: 10px;
-}
-
-#arch {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(138, 202, 122);
-    margin: 10px;
-}
-
-#struct {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(122, 137, 202);
-    margin: 10px;
-}
-
-#logique {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(122, 202, 134);
-    margin: 10px;
-}
-
-#mods {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(202, 126, 122);
-    margin: 10px;
-}
-
-#dep {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(154, 122, 202);
-    margin: 10px;
-}
-
-#concl {
-    padding: 30px;
-    border: 3px double black;
-    border-radius: 20px;
-    background-color: rgb(122, 184, 202);
-    margin: 10px;
 }
 
 #appCont {
-    display: flex;
-    flex-direction: row;
-    width: 95vw;
-    height: 90vh;
-    max-width: 1400px;
-    background-color: #3a3a3c;
-    border: 4px solid #1a1a1b;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    min-height: 100vh;
 }
 
+/* Si les panneaux latéraux sont cachés en JS, le main prend tout l'espace */
+#appCont:has(#statutLat[style*="display: none"]) {
+    grid-template-columns: 280px 1fr 0px;
+}
+
+/* ==========================================================================
+   3. MENU LATÉRAL
+   ========================================================================== */
 #menuLat {
-    width: 260px;
-    background: linear-gradient(135deg, #28282a, #1f1f20);
-    border-right: 3px solid #1a1a1b;
-    padding: 20px;
+    background-color: var(--bg-side);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    gap: 2.5rem;
+    box-shadow: var(--shadow);
 }
 
 #boxLogo {
-    width: 100%;
-    text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 2px dashed #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #logoApp {
-    max-width: 160px;
+    max-width: 80%;
     height: auto;
-    object-fit: contain;
-    border-radius: 20%;
+    filter: drop-shadow(0 0 12px rgba(255, 159, 28, 0.2));
+    transition: var(--transition);
 }
 
-#modesPrinci,
-.panneauSousMenu {
-    width: 100%;
+#logoApp:hover {
+    transform: scale(1.05);
+}
+
+.modesPrinci, .panneauSousMenu {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
+}
+
+/* ==========================================================================
+   4. BOUTONS & INPUTS
+   ========================================================================== */
+button {
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition);
 }
 
 .btnMenu {
     width: 100%;
-    padding: 14px;
-    background: linear-gradient(to bottom, #57575a, #434345);
-    color: #e0e0e0;
-    border: 2px solid #28282a;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
+    padding: 1rem 1.25rem;
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
     text-align: left;
-    padding-left: 20px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
+    font-size: 0.95rem;
 }
 
 .btnMenu:hover {
-    background: linear-gradient(to bottom, #707073, #535356);
-    color: #ffffff;
-    border-color: #1a1a1b;
-    transform: translateX(4px);
+    background: rgba(255, 159, 28, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateX(5px);
+}
+
+#regles {
+    text-align: center !important;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 50px !important; /* Respect de ton inline HTML */
 }
 
 .btnRetour {
-    width: 100%;
-    padding: 10px;
-    background: #c23616;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 10px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-    transition: background 0.2s;
+    background: transparent;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
 }
 
 .btnRetour:hover {
-    background: #e84118;
-}
-
-#cntPrinci {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #474749;
-    padding: 25px;
-    overflow-y: auto;
-}
-
-#entete h1 {
-    margin: 0 0 25px 0;
-    font-size: 2.2rem;
-    color: #f5f5f5;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    border-bottom: 3px solid #3a3a3c;
-    padding-bottom: 10px;
-}
-
-#zoneCont {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carteInfo {
-    background: #2a2a2b;
-    border: 2px solid #1a1a1b;
-    border-radius: 12px;
-    padding: 30px;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    color: #e0e0e0;
-}
-
-.carteInfo h3 {
-    margin-top: 0;
-    border-bottom: 1px solid #444;
-    padding-bottom: 10px;
-}
-
-.groupeInput {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.groupeInput label {
-    font-weight: 600;
-    color: #b0b0b2;
-}
-
-input[type="text"] {
-    padding: 12px;
-    background-color: #1f1f20;
-    border: 2px solid #3a3a3c;
-    border-radius: 6px;
-    color: white;
-    font-size: 1rem;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    border-color: #57575a;
+    color: var(--text-main);
 }
 
 .btnAct {
-    width: 100%;
-    padding: 12px;
-    background: #4a75a0;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background 0.2s;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: var(--bg-main);
+    border-radius: 10px;
+    font-weight: 700;
 }
 
 .btnAct:hover {
-    background: #5b87b3;
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 159, 28, 0.3);
+}
+
+.btnQuitter {
+    padding: 0.75rem 1.5rem;
+    color: white;
+    font-weight: 700;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-main);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-main);
+    outline: none;
+    transition: var(--transition);
+}
+
+input[type="text"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(255, 159, 28, 0.2);
+}
+
+/* ==========================================================================
+   5.  PRINCIPAL 
+   ========================================================================== */
+#cntPrinci {
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow-y: auto;
+}
+
+#entete {
+    text-align: center;
+}
+
+#entete h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(to right, var(--text-main), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#entete hr {
+    display: inline-block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+    border: none;
+    margin: 0 2px;
+    border-radius: 2px;
+}
+#entete hr:nth-child(3) { width: 120px; opacity: 0.7; }
+#entete hr:nth-child(4) { width: 40px; opacity: 0.4; }
+
+/* ==========================================================================
+   6. ZONE DE CONFIGURA
+   ========================================================================== */
+.carteInfo {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
 }
 
 #partageId {
-    display: block;
-    background-color: #1f1f20;
-    padding: 12px;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #e67e22;
-    border: 1px dashed #e67e22;
-    margin: 15px 0;
+    font-size: 1.5rem;
+    color: var(--accent);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px dashed var(--accent);
+    letter-spacing: 1px;
 }
 
-#jeuCont {
-    background-image: url('images/image.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+.groupeInput {
+    text-align: left;
     display: flex;
-    border-radius: 25px;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.groupeInput label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   7. LE PLATEAU DE JEU
+   ========================================================================== */
+#jeuCont {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
-    gap: 20px;
+    gap: 2rem;
     width: 100%;
+    margin-top: 1rem;
 }
 
 #tabJeu {
-    background: linear-gradient(135deg, #5a544e, #3a3530);
-    border: 10px solid #2b2521;
-    border-radius: 25px;
+    background: #2b1810; /* Couleur bois traditionnel sombre */
+    background-image: linear-gradient(135deg, #3a2218 25%, transparent 25%), 
+                      linear-gradient(225deg, #3a2218 25%, transparent 25%);
+    background-size: 40px 40px;
+    border: 12px solid #1c0f0a;
+    border-radius: 24px;
     padding: 20px;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 15px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.6);
     display: flex;
     flex-direction: column;
     gap: 25px;
     width: 100%;
-    max-width: 750px;
+    max-width: 900px;
 }
 
 .lignePlateau {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 40px;
-    padding: 15px 10px;
-    border: 2px solid rgba(0, 0, 0, 0.4);
-}
-
-#rangA {
-    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
-}
-
-#rangB {
-    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
 }
 
 .case {
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle at 30% 30%, #201c18, #000000);
-    border: 3px solid #1a1512;
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    font-weight: bold;
+    aspect-ratio: 1;
+    background: #120906;
+    border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.1), 0 6px 10px rgba(0, 0, 0, 0.6);
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #e2d4c9;
+    box-shadow: inset 5px 5px 15px rgba(0,0,0,0.8), 2px 2px 5px rgba(255,255,255,0.05);
+    border: 2px solid rgba(255, 255, 255, 0.02);
     cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s;
-    color: white;
+    transition: var(--transition);
+    position: relative;
 }
 
-#reg {
-    font-weight: 700;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    border-radius: 25px;
-    margin: 100px;
-    padding: 40px;
-    background-color: rgb(0, 0, 0) !important;
-    color: white;
+/* Effets au survol des cases */
+.case:hover {
+    transform: scale(1.05);
+    box-shadow: inset 2px 2px 8px rgba(0,0,0,0.9), 0 0 15px rgba(255, 159, 28, 0.4);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
-.caseJ2:hover {
-    transform: scale(1.15) translateY(-5px);
-    background: radial-gradient(circle at 30% 30%, #7f2c2c, #3a0e0e);
-    border-color: #5c1818;
-}
+/* Distinction d'équipes au cas où */
+.caseJ1 { border-bottom: 2px solid rgba(255, 159, 28, 0.2); }
+.caseJ2 { border-top: 2px solid rgba(148, 163, 184, 0.2); }
 
-.caseJ1:hover {
-    transform: scale(1.15) translateY(5px);
-    background: radial-gradient(circle at 30% 30%, #2c6e3d, #11361a);
-    border-color: #1a4d29;
-}
-
+/* Barre de contrôles sous le jeu */
 #barreCtrl {
-    width: 100%;
-    max-width: 750px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #2a2a2b;
-    padding: 12px 25px;
-    border-radius: 10px;
-    border: 1px solid #1a1a1b;
+    width: 100%;
+    max-width: 900px;
+    background: var(--bg-card);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 #infos {
-    margin: 0;
-    color: #b0b0b2;
-    font-style: italic;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-#restart {
-    width: auto;
-    padding: 8px 20px;
-    background-color: #7f8c8d;
-}
-
-#restart:hover {
-    background-color: #95a5a6;
-}
-
+/* ==========================================================================
+   8. PANNEAU DE STATUT LATÉRAL (right side)
+   ========================================================================== */
 #statutLat {
-    width: 240px;
-    background-color: #222224;
-    border-left: 3px solid #1a1a1b;
-    padding: 20px;
+    background-color: var(--bg-side);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.5rem;
+    box-shadow: var(--shadow);
 }
 
 .carteStatut {
-    background-color: #2e2e30;
-    border: 1px solid #3a3a3c;
-    border-radius: 6px;
-    padding: 12px;
+    background: rgba(255, 159, 28, 0.08);
+    border: 1px solid rgba(255, 159, 28, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
     text-align: center;
-    color: #e0e0e0;
 }
 
-#boxRole strong {
-    color: #4a75a0;
+.carteStatut strong {
+    color: var(--accent);
 }
 
 .panneauJoueurs {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .blocJoueur {
-    background: #2a2a2b;
-    border-left: 4px solid #7f8c8d;
-    border-radius: 0 6px 6px 0;
-    padding: 15px;
-}
-
-#blocJ1 {
-    border-left-color: #2c6e3d;
-}
-
-#blocJ2 {
-    border-left-color: #7f2c2c;
+    background: var(--bg-card);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition);
 }
 
 .blocJoueur h4 {
-    margin: 0 0 8px 0;
     font-size: 1.1rem;
-    color: #ffffff;
+    margin-bottom: 0.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .txtScore {
-    margin: 0;
-    color: #b0b0b2;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
 }
 
 .txtScore span {
     font-size: 1.2rem;
-    font-weight: bold;
-    color: #ffffff;
+    font-weight: 800;
+    color: var(--text-main);
+}
+.blocJoueur.actif {
+    border-color: var(--accent);
+    background: rgba(255, 159, 28, 0.03);
 }
 
-#res {
-    background-color: #1e3799;
-    color: white;
-    padding: 15px;
-    border-radius: 6px;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
+/* Responsive basique */
 @media (max-width: 1024px) {
     #appCont {
-        flex-direction: column;
-        height: auto;
-        min-height: 95vh;
+        grid-template-columns: 1fr;
     }
-    #menuLat {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 15px;
-        padding: 15px;
+    #menuLat, #statutLat {
+        border: none;
+        padding: 1rem;
     }
-    #boxLogo {
-        width: auto;
-        padding-bottom: 0;
-        border-bottom: none;
-    }
-    #logoApp {
-        max-width: 60px;
-    }
-    #modesPrinci,
-    .panneauSousMenu {
-        flex-direction: row;
-        width: auto;
-        flex: 1;
-        justify-content: flex-end;
-    }
-    .btnMenu {
-        width: auto;
-        padding: 10px 15px;
-    }
-    .btnRetour {
-        width: auto;
-        margin-bottom: 0;
-    }
-    #statutLat {
-        width: 100%;
-        border-left: none;
-        border-top: 3px solid #1a1a1b;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .panneauJoueurs {
-        flex-direction: row;
-        flex: 1;
-        justify-content: flex-end;
-    }
-    .blocJoueur {
-        padding: 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    #menuLat {
-        flex-direction: column;
-    }
-    #modesPrinci,
-    .panneauSousMenu {
-        width: 100%;
-        flex-direction: column;
-    }
-    .btnMenu {
-        width: 100%;
-    }
-    #tabJeu {
-        padding: 10px;
-        gap: 15px;
-    }
-    .lignePlateau {
-        padding: 8px 4px;
-    }
-    .case {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-    #barreCtrl {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    #statutLat {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .panneauJoueurs {
-        width: 100%;
-        flex-direction: column;
-    }
-}
-
-.panneauJoueurs {
-    width: 100%;
-    flex-direction: column;
-}
-
-.case {
-    opacity: 0;
-    transform: translateX(105px) rotate(-200deg);
-    transition: all 2s ease-out;
-    animation: apparitionDouce 4s forwards;
-    scale: 2;
-}
-
-@keyframes apparitionDouce {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-        scale: 1;
-    }
-}
-
-.case {
-    animation-delay: 0.5s;
-}
-
-#quitterJeu:hover {
-    scale: 1.2 !important;
-    transition-duration: 0.3s !important;
-}
-
-.case:hover {
-    scale: 1.2;
-    transform: translateX(3px);
-    transition-duration: 0.4s;
 }
