@@ -1,33 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
 
-/* Variables globales et themes */
+/* Variables : Couleurs claires pour le centre, sombres pour les menus latéraux */
 :root {
-    --bg-main: #0c0e11;
     --bg-side: #13161c;
-    --bg-card: #1c212a;
+    --bg-center: #ffffff; /* Le vrai fond blanc demandé */
     --accent: #ff9f1c;
-    --accent-hover: #ffb703;
-    --text-main: #fcfdfe;
-    --text-muted: #8d9bb0;
-    --danger: #ef4444;
+    --accent-hover: #e08914;
+    --text-dark: #1e293b; /* Texte sombre pour lire sur le fond blanc */
+    --text-light: #fcfdfe;
     --border-radius: 12px;
-    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --transition: all 0.25s ease;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     --font: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* Animations d apparition */
-@keyframes fadeInApp {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-    from { opacity: 0; transform: translateY(20px); }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Elements generaux */
 * {
     margin: 0;
     padding: 0;
@@ -36,11 +28,10 @@
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
+    background-color: var(--bg-side); /* Pour éviter les bords blancs sur les côtés */
+    color: var(--text-dark);
     min-height: 100vh;
     overflow-x: hidden;
-    animation: fadeInApp 0.8s ease-out;
 }
 
 /* Structure globale */
@@ -50,203 +41,200 @@ body {
     width: 100vw;
 }
 
-/* Zone centrale avec le fond texture */
+/* 
+=========================================
+ZONE CENTRALE (Le fameux fond blanc)
+=========================================
+*/
 #cntPrinci {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5rem 1rem;
+    padding: 2rem;
+    background-color: var(--bg-center); /* Fond blanc pur en arrière */
     overflow-y: auto;
-    background-color: var(--bg-main);
-    background-image: 
-        radial-gradient(at 50% 100%, rgba(255, 159, 28, 0.08) 0px, transparent 60%),
-        linear-gradient(180deg, var(--bg-main) 30%, transparent 80%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff9f1c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    background-size: 100% 100%, 100% 100%, 60px 60px;
+    animation: fadeIn 0.6s ease-out;
 }
 
-#cntPrinci, #menuLat, #statutLat {
-    animation: slideInUp 0.6s ease-out;
+#entete { text-align: center; margin-bottom: 2rem; width: 100%; }
+
+#entete h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: var(--text-dark);
 }
 
-/* Panneaux de gauche et de droite */
+#entete hr { display: none; }
+
+/* 
+=========================================
+MENUS LATÉRAUX
+=========================================
+*/
 #menuLat, #statutLat {
-    width: 280px;
+    width: 300px;
     background-color: var(--bg-side);
-    border-right: 1px solid rgba(255, 255, 255, 0.04);
-    padding: 1.5rem;
+    color: var(--text-light);
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    z-index: 10;
 }
 
 #statutLat {
-    border-right: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: -2px 0 15px rgba(0,0,0,0.5);
 }
 
-/* Version mobile et responsive */
-@media (max-width: 1100px) {
-    #appCont { flex-direction: column; }
-    #menuLat, #statutLat {
-        width: 100%;
-        border: none;
-        padding: 1rem;
-    }
-    #cntPrinci { padding: 1.5rem 1rem; }
-}
-
-/* Section logo */
 #boxLogo {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
 }
 
-#logoApp {
-    max-width: 140px;
-    filter: drop-shadow(0 0 10px rgba(255, 159, 28, 0.2));
-}
+#logoApp { max-width: 150px; }
 
-/* Conteneurs de menus */
 #modesPrinci, .panneauSousMenu {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-/* Boutons et formulaires */
-button { cursor: pointer; border: none; font-weight: 600; transition: var(--transition); }
+/* Responsive mobile */
+@media (max-width: 1100px) {
+    #appCont { flex-direction: column; }
+    #menuLat, #statutLat { width: 100%; padding: 1.5rem; }
+}
+
+/* 
+=========================================
+BOUTONS (Retour, Menu, Validation)
+=========================================
+*/
+button { cursor: pointer; border: none; font-weight: 700; transition: var(--transition); }
 
 .btnMenu {
     width: 100%;
-    padding: 0.9rem 1.2rem;
-    background: var(--bg-card);
-    color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 1rem;
+    background: #1e242e;
+    color: var(--text-light);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--border-radius);
-    text-align: left;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .btnMenu:hover {
-    background: rgba(255, 159, 28, 0.06);
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateX(4px);
+    background: var(--accent);
+    color: #000;
+    transform: translateY(-2px);
+}
+
+
+.btnRetour {
+    background: #2a313c;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-size: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 0.5rem;
+}
+
+.btnRetour:hover {
+    background: #ef4444; 
+    color: #fff;
 }
 
 .btnAct {
-    padding: 0.7rem 1.4rem;
+    padding: 1rem 2rem;
     background: var(--accent);
-    color: var(--bg-main);
-    border-radius: 8px;
-    font-weight: 700;
+    color: #000;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
 }
 
-.btnAct:hover {
-    background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 159, 28, 0.3);
+.btnAct:hover { background: var(--accent-hover); transform: translateY(-3px); }
+
+/* 
+=========================================
+FORMULAIRES ET ESPACES 
+=========================================
+*/
+.carteInfo {
+    background: #f8fafc;
+    border-radius: var(--border-radius);
+    padding: 3rem; 
+    width: 100%;
+    max-width: 800px;
+    margin: 1rem auto;
+    border: 1px solid #e2e8f0;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+
+#partageId {
+    font-size: 1.8rem;
+    color: var(--accent);
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px dashed var(--accent);
+    margin: 1rem 0;
+    word-break: break-all;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 0.75rem;
-    background: var(--bg-main);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
     border-radius: 8px;
-    color: var(--text-main);
+    color: var(--text-dark);
+    font-size: 1.1rem;
 }
 
 input[type="text"]:focus { border-color: var(--accent); outline: none; }
 
-/* Boite d infos pour les codes et les pseudos */
-.carteInfo {
-    background: var(--bg-card);
-    border-radius: var(--border-radius);
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 480px;
-    margin: 1rem auto;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    text-align: center;
-    animation: slideInUp 0.5s ease-out;
-}
+.groupeInput { text-align: left; display: flex; flex-direction: column; gap: 0.5rem; }
+.groupeInput label { font-size: 1rem; font-weight: 700; color: var(--text-dark); }
 
-/* Code d hote genere a partager */
-#partageId {
-    font-size: 1.4rem;
-    color: var(--accent);
-    background: #000;
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: 1px dashed var(--accent);
-    letter-spacing: 1px;
-    margin: 0.5rem 0;
-    word-wrap: break-word;
-}
-
-.groupeInput {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.groupeInput label {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 600;
-}
-
-/* Entete du titre principal */
-#entete { text-align: center; margin-bottom: 1rem; width: 100%; }
-
-#entete h1 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-    color: var(--accent);
-    filter: drop-shadow(0 0 10px rgba(255, 159, 28, 0.2));
-}
-
-#entete hr { display: none; }
-
-/* Plateau de jeu et cases du Songo */
+/* 
+=========================================
+LE PLATEAU DE SONGO
+=========================================
+*/
 #jeuCont {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     width: 100%;
-    max-width: 860px;
+    max-width: 900px; /* Plus d'espace pour le jeu */
+    margin-top: 1rem;
 }
 
 #tabJeu {
     background: #23130d;
-    border: 10px solid #160c08;
+    border: 12px solid #160c08;
     border-radius: 20px;
-    padding: 15px;
-    box-shadow: var(--shadow), inset 0 0 25px rgba(0,0,0,0.6);
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 100%;
 }
 
-.lignePlateau {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-}
+.lignePlateau { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }
 
 .case {
     aspect-ratio: 1;
@@ -255,7 +243,7 @@ input[type="text"]:focus { border-color: var(--accent); outline: none; }
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: #dec8b8;
     box-shadow: inset 4px 4px 12px rgba(0,0,0,0.8);
@@ -265,48 +253,44 @@ input[type="text"]:focus { border-color: var(--accent); outline: none; }
 
 .case:hover {
     transform: scale(1.05);
-    box-shadow: inset 2px 2px 8px #000, 0 0 15px rgba(255, 159, 28, 0.3);
+    box-shadow: inset 2px 2px 8px #000, 0 0 15px var(--accent);
     color: var(--accent);
 }
 
-/* Responsive du plateau */
-@media (max-width: 768px) {
-    #tabJeu { padding: 8px; gap: 8px; border-width: 6px; }
-    .case { font-size: 1rem; }
-    #entete h1 { font-size: 1.8rem; }
-}
-
-/* Barre de controle sous le plateau */
 #barreCtrl {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: var(--bg-card);
-    padding: 0.8rem 1.2rem;
-    border-radius: 10px;
+    background: #f8fafc;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #e2e8f0;
     gap: 1rem;
 }
 
-#infos { color: var(--text-muted); font-weight: 600; font-size: 0.9rem; flex: 1; }
+#infos { color: var(--text-dark); font-weight: 700; font-size: 1.1rem; flex: 1; }
 
-/* Section des scores et du statut de la partie */
+/* 
+=========================================
+PANNEAU DE DROITE (Scores)
+=========================================
+*/
 .carteStatut {
-    background: rgba(255, 159, 28, 0.08);
-    border: 1px solid rgba(255, 159, 28, 0.2);
-    padding: 0.8rem;
-    border-radius: 10px;
+    background: rgba(255, 159, 28, 0.1);
+    border: 1px solid var(--accent);
+    padding: 1rem;
+    border-radius: var(--border-radius);
     text-align: center;
 }
 
 .carteStatut strong { color: var(--accent); }
 
 .blocJoueur {
-    background: var(--bg-card);
-    padding: 1rem;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: #1e242e;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
 }
 
-.txtScore { font-size: 0.8rem; color: var(--text-muted); }
-.txtScore span { font-size: 1.1rem; font-weight: 800; color: var(--text-main); }
+.txtScore { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }
+.txtScore span { font-size: 1.5rem; font-weight: 800; color: var(--text-light); }
