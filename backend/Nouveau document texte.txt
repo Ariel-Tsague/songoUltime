@@ -1,0 +1,12 @@
+on cré songo,
+on cré backend et à l interieur models controllers et routes .on ouvre dans le terminal en saisisant cmd dans la barre d adresse
+on fait npm install -y
+puis npm install nodemon --save-dev
+--save-dev car on en a plus besoin quand l PI est en ligne 
+On ouvre le package.json et on ajoute dans script la ligne: "dev":"nodemon server.js"...c est ce qu on entrera pour le démarrer(mettre une virgule avant) npm run dev
+je cré le modèle songo.js dans le dossier models et on exporte
+
+je cré le controlleur songoController.js dans controllers qui recevra des requetes HTTp ; ordonnera le traitement par le model et renvera les reponses
+on cré la songoRoute qui va définir la fonction exécutéé par le controleur lors de la reception
+on cré le fichier server.js à la racine du dossier Backend
+et on gère les codes...si il y a bug d autorisation sur le navigateur  faire npm install cors et dans server.js , faire cors=require('cors') et app.use(cors());
