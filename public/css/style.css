@@ -1,27 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-
+/* Variables globales et themes */
 :root {
-    --bg-main: #0f1115;
-    --bg-side: #161920;
-    --bg-card: #1f242e;
-    --accent: #ff9f1c; 
+    --bg-main: #0c0e11;
+    --bg-side: #13161c;
+    --bg-card: #1c212a;
+    --accent: #ff9f1c;
     --accent-hover: #ffb703;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    --text-main: #fcfdfe;
+    --text-muted: #8d9bb0;
     --danger: #ef4444;
-    --danger-hover: #dc2626;
-    --success: #10b981;
-    --border-radius: 16px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --border-radius: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    --font: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* Animations d apparition */
+@keyframes fadeInApp {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Elements generaux */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: var(--font);
 }
 
 body {
@@ -29,197 +40,158 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
+    animation: fadeInApp 0.8s ease-out;
 }
 
+/* Structure globale */
 #appCont {
-    display: grid;
-    grid-template-columns: 280px 1fr 280px;
+    display: flex;
     min-height: 100vh;
+    width: 100vw;
 }
 
-/* Si les panneaux latéraux sont cachés en JS, le main prend tout l'espace */
-#appCont:has(#statutLat[style*="display: none"]) {
-    grid-template-columns: 280px 1fr 0px;
-}
-
-/* ==========================================================================
-   3. MENU LATÉRAL
-   ========================================================================== */
-#menuLat {
-    background-color: var(--bg-side);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 2rem 1.5rem;
+/* Zone centrale avec le fond texture */
+#cntPrinci {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    box-shadow: var(--shadow);
+    align-items: center;
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(at 50% 100%, rgba(255, 159, 28, 0.08) 0px, transparent 60%),
+        linear-gradient(180deg, var(--bg-main) 30%, transparent 80%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff9f1c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 100% 100%, 100% 100%, 60px 60px;
 }
 
+#cntPrinci, #menuLat, #statutLat {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Panneaux de gauche et de droite */
+#menuLat, #statutLat {
+    width: 280px;
+    background-color: var(--bg-side);
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+#statutLat {
+    border-right: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Version mobile et responsive */
+@media (max-width: 1100px) {
+    #appCont { flex-direction: column; }
+    #menuLat, #statutLat {
+        width: 100%;
+        border: none;
+        padding: 1rem;
+    }
+    #cntPrinci { padding: 1.5rem 1rem; }
+}
+
+/* Section logo */
 #boxLogo {
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 1rem;
 }
 
 #logoApp {
-    max-width: 80%;
-    height: auto;
-    filter: drop-shadow(0 0 12px rgba(255, 159, 28, 0.2));
-    transition: var(--transition);
+    max-width: 140px;
+    filter: drop-shadow(0 0 10px rgba(255, 159, 28, 0.2));
 }
 
-#logoApp:hover {
-    transform: scale(1.05);
-}
-
-.modesPrinci, .panneauSousMenu {
+/* Conteneurs de menus */
+#modesPrinci, .panneauSousMenu {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
-/* ==========================================================================
-   4. BOUTONS & INPUTS
-   ========================================================================== */
-button {
-    cursor: pointer;
-    border: none;
-    font-weight: 600;
-    transition: var(--transition);
-}
+/* Boutons et formulaires */
+button { cursor: pointer; border: none; font-weight: 600; transition: var(--transition); }
 
 .btnMenu {
     width: 100%;
-    padding: 1rem 1.25rem;
+    padding: 0.9rem 1.2rem;
     background: var(--bg-card);
     color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: var(--border-radius);
     text-align: left;
-    font-size: 0.95rem;
-}
-
-.btnMenu:hover {
-    background: rgba(255, 159, 28, 0.1);
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateX(5px);
-}
-
-#regles {
-    text-align: center !important;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 50px !important; /* Respect de ton inline HTML */
-}
-
-.btnRetour {
-    background: transparent;
-    color: var(--text-muted);
-    text-align: left;
-    padding: 0.5rem 0;
     font-size: 0.9rem;
 }
 
-.btnRetour:hover {
-    color: var(--text-main);
+.btnMenu:hover {
+    background: rgba(255, 159, 28, 0.06);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateX(4px);
 }
 
 .btnAct {
-    padding: 0.75rem 1.5rem;
+    padding: 0.7rem 1.4rem;
     background: var(--accent);
     color: var(--bg-main);
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 700;
 }
 
 .btnAct:hover {
     background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 159, 28, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 159, 28, 0.3);
 }
 
-.btnQuitter {
-    padding: 0.75rem 1.5rem;
-    color: white;
-    font-weight: 700;
-}
 input[type="text"] {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem;
     background: var(--bg-main);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 8px;
     color: var(--text-main);
-    outline: none;
-    transition: var(--transition);
 }
 
-input[type="text"]:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(255, 159, 28, 0.2);
-}
+input[type="text"]:focus { border-color: var(--accent); outline: none; }
 
-/* ==========================================================================
-   5.  PRINCIPAL 
-   ========================================================================== */
-#cntPrinci {
-    padding: 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    overflow-y: auto;
-}
-
-#entete {
-    text-align: center;
-}
-
-#entete h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-    background: linear-gradient(to right, var(--text-main), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#entete hr {
-    display: inline-block;
-    width: 60px;
-    height: 4px;
-    background: var(--accent);
-    border: none;
-    margin: 0 2px;
-    border-radius: 2px;
-}
-#entete hr:nth-child(3) { width: 120px; opacity: 0.7; }
-#entete hr:nth-child(4) { width: 40px; opacity: 0.4; }
-
-/* ==========================================================================
-   6. ZONE DE CONFIGURA
-   ========================================================================== */
+/* Boite d infos pour les codes et les pseudos */
 .carteInfo {
     background: var(--bg-card);
     border-radius: var(--border-radius);
-    padding: 2rem;
-    max-width: 500px;
-    margin: 2rem auto;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    margin: 1rem auto;
     border: 1px solid rgba(255, 255, 255, 0.03);
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     text-align: center;
+    animation: slideInUp 0.5s ease-out;
 }
 
+/* Code d hote genere a partager */
 #partageId {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--accent);
-    background: rgba(0, 0, 0, 0.2);
-    padding: 0.75rem;
-    border-radius: 10px;
+    background: #000;
+    padding: 0.6rem;
+    border-radius: 8px;
     border: 1px dashed var(--accent);
     letter-spacing: 1px;
+    margin: 0.5rem 0;
+    word-wrap: break-word;
 }
 
 .groupeInput {
@@ -235,157 +207,106 @@ input[type="text"]:focus {
     font-weight: 600;
 }
 
-/* ==========================================================================
-   7. LE PLATEAU DE JEU
-   ========================================================================== */
+/* Entete du titre principal */
+#entete { text-align: center; margin-bottom: 1rem; width: 100%; }
+
+#entete h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--accent);
+    filter: drop-shadow(0 0 10px rgba(255, 159, 28, 0.2));
+}
+
+#entete hr { display: none; }
+
+/* Plateau de jeu et cases du Songo */
 #jeuCont {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     width: 100%;
-    margin-top: 1rem;
+    max-width: 860px;
 }
 
 #tabJeu {
-    background: #2b1810; /* Couleur bois traditionnel sombre */
-    background-image: linear-gradient(135deg, #3a2218 25%, transparent 25%), 
-                      linear-gradient(225deg, #3a2218 25%, transparent 25%);
-    background-size: 40px 40px;
-    border: 12px solid #1c0f0a;
-    border-radius: 24px;
-    padding: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.6);
+    background: #23130d;
+    border: 10px solid #160c08;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: var(--shadow), inset 0 0 25px rgba(0,0,0,0.6);
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px;
     width: 100%;
-    max-width: 900px;
 }
 
 .lignePlateau {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 15px;
+    gap: 10px;
 }
 
 .case {
     aspect-ratio: 1;
-    background: #120906;
+    background: #100806;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 800;
-    color: #e2d4c9;
-    box-shadow: inset 5px 5px 15px rgba(0,0,0,0.8), 2px 2px 5px rgba(255,255,255,0.05);
-    border: 2px solid rgba(255, 255, 255, 0.02);
+    color: #dec8b8;
+    box-shadow: inset 4px 4px 12px rgba(0,0,0,0.8);
     cursor: pointer;
     transition: var(--transition);
-    position: relative;
 }
 
-/* Effets au survol des cases */
 .case:hover {
     transform: scale(1.05);
-    box-shadow: inset 2px 2px 8px rgba(0,0,0,0.9), 0 0 15px rgba(255, 159, 28, 0.4);
-    border-color: var(--accent);
+    box-shadow: inset 2px 2px 8px #000, 0 0 15px rgba(255, 159, 28, 0.3);
     color: var(--accent);
 }
 
-/* Distinction d'équipes au cas où */
-.caseJ1 { border-bottom: 2px solid rgba(255, 159, 28, 0.2); }
-.caseJ2 { border-top: 2px solid rgba(148, 163, 184, 0.2); }
+/* Responsive du plateau */
+@media (max-width: 768px) {
+    #tabJeu { padding: 8px; gap: 8px; border-width: 6px; }
+    .case { font-size: 1rem; }
+    #entete h1 { font-size: 1.8rem; }
+}
 
-/* Barre de contrôles sous le jeu */
+/* Barre de controle sous le plateau */
 #barreCtrl {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 900px;
     background: var(--bg-card);
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-#infos {
-    color: var(--text-muted);
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-/* ==========================================================================
-   8. PANNEAU DE STATUT LATÉRAL (right side)
-   ========================================================================== */
-#statutLat {
-    background-color: var(--bg-side);
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    box-shadow: var(--shadow);
-}
-
-.carteStatut {
-    background: rgba(255, 159, 28, 0.08);
-    border: 1px solid rgba(255, 159, 28, 0.2);
-    padding: 1rem;
-    border-radius: 12px;
-    text-align: center;
-}
-
-.carteStatut strong {
-    color: var(--accent);
-}
-
-.panneauJoueurs {
-    display: flex;
-    flex-direction: column;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
     gap: 1rem;
 }
 
+#infos { color: var(--text-muted); font-weight: 600; font-size: 0.9rem; flex: 1; }
+
+/* Section des scores et du statut de la partie */
+.carteStatut {
+    background: rgba(255, 159, 28, 0.08);
+    border: 1px solid rgba(255, 159, 28, 0.2);
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.carteStatut strong { color: var(--accent); }
+
 .blocJoueur {
     background: var(--bg-card);
-    padding: 1.25rem;
-    border-radius: 12px;
+    padding: 1rem;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.03);
-    transition: var(--transition);
 }
 
-.blocJoueur h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.txtScore {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.txtScore span {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--text-main);
-}
-.blocJoueur.actif {
-    border-color: var(--accent);
-    background: rgba(255, 159, 28, 0.03);
-}
-
-/* Responsive basique */
-@media (max-width: 1024px) {
-    #appCont {
-        grid-template-columns: 1fr;
-    }
-    #menuLat, #statutLat {
-        border: none;
-        padding: 1rem;
-    }
-}
+.txtScore { font-size: 0.8rem; color: var(--text-muted); }
+.txtScore span { font-size: 1.1rem; font-weight: 800; color: var(--text-main); }
