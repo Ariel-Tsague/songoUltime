@@ -291,6 +291,68 @@ PANNEAU DE DROITE (Scores)
     padding: 1.5rem;
     border-radius: var(--border-radius);
 }
+/* fond gris de la zone principale */
+#cntPrinci {
+    background-color: #eef2f6; 
+    background-image: none; 
+}
+
+/* plateau style bois */
+#tabJeu {
+    background: linear-gradient(135deg, #4a2c11 0%, #2b1404 100%);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3), 
+        inset 0 4px 20px rgba(255, 255, 255, 0.1), 
+        inset 0 -6px 30px rgba(0, 0, 0, 0.8);
+    border: 14px solid #1f0f03;
+    border-radius: 24px;
+}
+
+/* style des creux */
+.case {
+    background: radial-gradient(circle at 50% 50%, #0a0401 50%, #23130d 100%);
+    box-shadow: 
+        inset 6px 6px 18px rgba(0, 0, 0, 0.95), 
+        inset -3px -3px 12px rgba(255, 255, 255, 0.03),
+        0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 2px solid #160b05;
+    position: relative;
+}
+
+/* effet au survol */
+.case:hover {
+    transform: scale(1.03);
+    box-shadow: 
+        inset 4px 4px 12px rgba(0, 0, 0, 0.95), 
+        0 0 15px rgba(255, 159, 28, 0.5);
+    border-color: var(--accent);
+}
+
+/* boules de songo (premiere bille) */
+.case::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle at 35% 35%, #ffb703, #ff9f1c 50%, #7c4a02 100%);
+    border-radius: 50%;
+    bottom: 10px;
+    right: 12px;
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* deuxieme bille pour donner du relief */
+.case::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 35% 35%, #ffe169, #ffb703 50%, #945c00 100%);
+    border-radius: 50%;
+    top: 12px;
+    left: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
 
 .txtScore { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }
 .txtScore span { font-size: 1.5rem; font-weight: 800; color: var(--text-light); }
