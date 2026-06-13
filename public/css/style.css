@@ -1,346 +1,621 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-
-/* Variables : Couleurs claires pour le centre, sombres pour les menus latéraux */
-:root {
-    --bg-side: #13161c;
-    --bg-center: #ffffff; /* Le vrai fond blanc demandé */
-    --accent: #ff9f1c;
-    --accent-hover: #e08914;
-    --text-dark: #1e293b; /* Texte sombre pour lire sur le fond blanc */
-    --text-light: #fcfdfe;
-    --border-radius: 12px;
-    --transition: all 0.25s ease;
-    --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    --font: 'Plus Jakarta Sans', sans-serif;
-}
-
-/* Animations d apparition */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    font-family: var(--font);
+}
+
+h1 {
+    background-color: rgba(247, 211, 10, 0.105);
+    color: green;
+    text-align: center;
+    text-shadow: 0 20px 15px rgba(183, 124, 135, 1);
+}
+
+#regles:hover {
+    scale: 1.3;
+    background-color: green;
+    transition-duration: 0.3s;
 }
 
 body {
-    background-color: var(--bg-side); /* Pour éviter les bords blancs sur les côtés */
-    color: var(--text-dark);
+    background-color: #2e2e30;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.3) 20%, transparent 20%), radial-gradient(rgba(0, 0, 0, 0.3) 20%, transparent 20%);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
+    opacity: 1;
 }
 
-/* Structure globale */
+body h2 {
+    background-color: black;
+    border-radius: 40px;
+    padding: 30px;
+    color: white;
+    margin-left: 80px;
+    margin-right: 20px;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+body h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 50px;
+}
+
+#int {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(122, 184, 202);
+    margin: 10px;
+}
+
+#pre {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(122, 202, 197);
+    margin: 10px;
+}
+
+#arch {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(138, 202, 122);
+    margin: 10px;
+}
+
+#struct {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(122, 137, 202);
+    margin: 10px;
+}
+
+#logique {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(122, 202, 134);
+    margin: 10px;
+}
+
+#mods {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(202, 126, 122);
+    margin: 10px;
+}
+
+#dep {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(154, 122, 202);
+    margin: 10px;
+}
+
+#concl {
+    padding: 30px;
+    border: 3px double black;
+    border-radius: 20px;
+    background-color: rgb(122, 184, 202);
+    margin: 10px;
+}
+
 #appCont {
     display: flex;
-    min-height: 100vh;
-    width: 100vw;
+    flex-direction: row;
+    width: 95vw;
+    height: 90vh;
+    max-width: 1400px;
+    background-color: #3a3a3c;
+    border: 4px solid #1a1a1b;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
 }
 
-/* 
-=========================================
-ZONE CENTRALE (Le fameux fond blanc)
-=========================================
-*/
+#menuLat {
+    width: 260px;
+    background: linear-gradient(135deg, #28282a, #1f1f20);
+    border-right: 3px solid #1a1a1b;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#boxLogo {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #444;
+}
+
+#logoApp {
+    max-width: 160px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 20%;
+}
+
+#modesPrinci,
+.panneauSousMenu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btnMenu {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to bottom, #57575a, #434345);
+    color: #e0e0e0;
+    border: 2px solid #28282a;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btnMenu:hover {
+    background: linear-gradient(to bottom, #707073, #535356);
+    color: #ffffff;
+    border-color: #1a1a1b;
+    transform: translateX(4px);
+}
+
+.btnRetour {
+    width: 100%;
+    padding: 10px;
+    background: #c23616;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.2s;
+}
+
+.btnRetour:hover {
+    background: #e84118;
+}
+
 #cntPrinci {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: var(--bg-center); /* Fond blanc pur en arrière */
+    background-color: #474749;
+    padding: 25px;
     overflow-y: auto;
-    animation: fadeIn 0.6s ease-out;
 }
-
-#entete { text-align: center; margin-bottom: 2rem; width: 100%; }
 
 #entete h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: 5px;
-    color: var(--text-dark);
+    margin: 0 0 25px 0;
+    font-size: 2.2rem;
+    color: #f5f5f5;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    border-bottom: 3px solid #3a3a3c;
+    padding-bottom: 10px;
 }
 
-#entete hr { display: none; }
-
-/* 
-=========================================
-MENUS LATÉRAUX
-=========================================
-*/
-#menuLat, #statutLat {
-    width: 300px;
-    background-color: var(--bg-side);
-    color: var(--text-light);
-    padding: 2rem 1.5rem;
+#zoneCont {
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-    z-index: 10;
-}
-
-#statutLat {
-    box-shadow: -2px 0 15px rgba(0,0,0,0.5);
-}
-
-#boxLogo {
-    display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
 }
 
-#logoApp { max-width: 150px; }
-
-#modesPrinci, .panneauSousMenu {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* Responsive mobile */
-@media (max-width: 1100px) {
-    #appCont { flex-direction: column; }
-    #menuLat, #statutLat { width: 100%; padding: 1.5rem; }
-}
-
-/* 
-=========================================
-BOUTONS (Retour, Menu, Validation)
-=========================================
-*/
-button { cursor: pointer; border: none; font-weight: 700; transition: var(--transition); }
-
-.btnMenu {
-    width: 100%;
-    padding: 1rem;
-    background: #1e242e;
-    color: var(--text-light);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-}
-
-.btnMenu:hover {
-    background: var(--accent);
-    color: #000;
-    transform: translateY(-2px);
-}
-
-
-.btnRetour {
-    background: #2a313c;
-    color: #fff;
-    padding: 0.8rem 1rem;
-    border-radius: var(--border-radius);
-    text-align: center;
-    font-size: 1rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    margin-bottom: 0.5rem;
-}
-
-.btnRetour:hover {
-    background: #ef4444; 
-    color: #fff;
-}
-
-.btnAct {
-    padding: 1rem 2rem;
-    background: var(--accent);
-    color: #000;
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
-}
-
-.btnAct:hover { background: var(--accent-hover); transform: translateY(-3px); }
-
-/* 
-=========================================
-FORMULAIRES ET ESPACES 
-=========================================
-*/
 .carteInfo {
-    background: #f8fafc;
-    border-radius: var(--border-radius);
-    padding: 3rem; 
+    background: #2a2a2b;
+    border: 2px solid #1a1a1b;
+    border-radius: 12px;
+    padding: 30px;
     width: 100%;
-    max-width: 800px;
-    margin: 1rem auto;
-    border: 1px solid #e2e8f0;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
-    animation: fadeIn 0.5s ease;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    color: #e0e0e0;
 }
 
+.carteInfo h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
 
-#partageId {
-    font-size: 1.8rem;
-    color: var(--accent);
-    background: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 2px dashed var(--accent);
-    margin: 1rem 0;
-    word-break: break-all;
+.groupeInput {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.groupeInput label {
+    font-weight: 600;
+    color: #b0b0b2;
 }
 
 input[type="text"] {
-    width: 100%;
-    padding: 1rem;
-    background: #ffffff;
-    border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    color: var(--text-dark);
-    font-size: 1.1rem;
+    padding: 12px;
+    background-color: #1f1f20;
+    border: 2px solid #3a3a3c;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
 }
 
-input[type="text"]:focus { border-color: var(--accent); outline: none; }
+input[type="text"]:focus {
+    outline: none;
+    border-color: #57575a;
+}
 
-.groupeInput { text-align: left; display: flex; flex-direction: column; gap: 0.5rem; }
-.groupeInput label { font-size: 1rem; font-weight: 700; color: var(--text-dark); }
+.btnAct {
+    width: 100%;
+    padding: 12px;
+    background: #4a75a0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s;
+}
 
-/* 
-=========================================
-LE PLATEAU DE SONGO
-=========================================
-*/
+.btnAct:hover {
+    background: #5b87b3;
+}
+
+#partageId {
+    display: block;
+    background-color: #1f1f20;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #e67e22;
+    border: 1px dashed #e67e22;
+    margin: 15px 0;
+}
+
 #jeuCont {
+    background-image: url('images/image.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     display: flex;
+    border-radius: 25px;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    margin-top: 15px;
+    gap: 20px;
     width: 100%;
-    max-width: 900px; /* Plus d'espace pour le jeu */
-    margin-top: 1rem;
 }
 
 #tabJeu {
-    background: #23130d;
-    border: 12px solid #160c08;
-    border-radius: 20px;
+    background: linear-gradient(135deg, #5a544e, #3a3530);
+    border: 10px solid #2b2521;
+    border-radius: 25px;
     padding: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 15px 30px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     width: 100%;
+    max-width: 750px;
 }
 
-.lignePlateau { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }
+.lignePlateau {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    padding: 15px 10px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+#rangA {
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+}
+
+#rangB {
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3);
+}
 
 .case {
-    aspect-ratio: 1;
-    background: #100806;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #201c18, #000000);
+    border: 3px solid #1a1512;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    font-weight: bold;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #dec8b8;
-    box-shadow: inset 4px 4px 12px rgba(0,0,0,0.8);
+    justify-content: center;
+    box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.1), 0 6px 10px rgba(0, 0, 0, 0.6);
     cursor: pointer;
-    transition: var(--transition);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s;
+    color: white;
 }
 
-.case:hover {
-    transform: scale(1.05);
-    box-shadow: inset 2px 2px 8px #000, 0 0 15px var(--accent);
-    color: var(--accent);
+#reg {
+    font-weight: 700;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 25px;
+    margin: 100px;
+    padding: 40px;
+    background-color: rgb(0, 0, 0) !important;
+    color: white;
+}
+
+.caseJ2:hover {
+    transform: scale(1.15) translateY(-5px);
+    background: radial-gradient(circle at 30% 30%, #7f2c2c, #3a0e0e);
+    border-color: #5c1818;
+}
+
+.caseJ1:hover {
+    transform: scale(1.15) translateY(5px);
+    background: radial-gradient(circle at 30% 30%, #2c6e3d, #11361a);
+    border-color: #1a4d29;
 }
 
 #barreCtrl {
+    width: 100%;
+    max-width: 750px;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    background: #f8fafc;
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
-    border: 1px solid #e2e8f0;
-    gap: 1rem;
+    background-color: #2a2a2b;
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: 1px solid #1a1a1b;
 }
 
-#infos { color: var(--text-dark); font-weight: 700; font-size: 1.1rem; flex: 1; }
+#infos {
+    margin: 0;
+    color: #b0b0b2;
+    font-style: italic;
+}
 
-/* 
-=========================================
-PANNEAU DE DROITE (Scores)
-=========================================
-*/
+#restart {
+    width: auto;
+    padding: 8px 20px;
+    background-color: #7f8c8d;
+}
+
+#restart:hover {
+    background-color: #95a5a6;
+}
+
+#statutLat {
+    width: 240px;
+    background-color: #222224;
+    border-left: 3px solid #1a1a1b;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .carteStatut {
-    background: rgba(255, 159, 28, 0.1);
-    border: 1px solid var(--accent);
-    padding: 1rem;
-    border-radius: var(--border-radius);
+    background-color: #2e2e30;
+    border: 1px solid #3a3a3c;
+    border-radius: 6px;
+    padding: 12px;
     text-align: center;
+    color: #e0e0e0;
 }
 
-.carteStatut strong { color: var(--accent); }
+#boxRole strong {
+    color: #4a75a0;
+}
+
+.panneauJoueurs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 .blocJoueur {
-    background: #1e242e;
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-}
-/* fond gris de la zone principale */
-#cntPrinci {
-    background-color: #eef2f6; 
-    background-image: none; 
+    background: #2a2a2b;
+    border-left: 4px solid #7f8c8d;
+    border-radius: 0 6px 6px 0;
+    padding: 15px;
 }
 
-/* plateau style bois */
-#tabJeu {
-    background: linear-gradient(135deg, #4a2c11 0%, #2b1404 100%);
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3), 
-        inset 0 4px 20px rgba(255, 255, 255, 0.1), 
-        inset 0 -6px 30px rgba(0, 0, 0, 0.8);
-    border: 14px solid #1f0f03;
-    border-radius: 24px;
+#blocJ1 {
+    border-left-color: #2c6e3d;
 }
 
-/* style des creux */
+#blocJ2 {
+    border-left-color: #7f2c2c;
+}
+
+.blocJoueur h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.txtScore {
+    margin: 0;
+    color: #b0b0b2;
+    font-size: 0.95rem;
+}
+
+.txtScore span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#res {
+    background-color: #1e3799;
+    color: white;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1024px) {
+    #appCont {
+        flex-direction: column;
+        height: auto;
+        min-height: 95vh;
+    }
+    #menuLat {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 15px;
+    }
+    #boxLogo {
+        width: auto;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    #logoApp {
+        max-width: 60px;
+    }
+    #modesPrinci,
+    .panneauSousMenu {
+        flex-direction: row;
+        width: auto;
+        flex: 1;
+        justify-content: flex-end;
+    }
+    .btnMenu {
+        width: auto;
+        padding: 10px 15px;
+    }
+    .btnRetour {
+        width: auto;
+        margin-bottom: 0;
+    }
+    #statutLat {
+        width: 100%;
+        border-left: none;
+        border-top: 3px solid #1a1a1b;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .panneauJoueurs {
+        flex-direction: row;
+        flex: 1;
+        justify-content: flex-end;
+    }
+    .blocJoueur {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #menuLat {
+        flex-direction: column;
+    }
+    #modesPrinci,
+    .panneauSousMenu {
+        width: 100%;
+        flex-direction: column;
+    }
+    .btnMenu {
+        width: 100%;
+    }
+    #tabJeu {
+        padding: 10px;
+        gap: 15px;
+    }
+    .lignePlateau {
+        padding: 8px 4px;
+    }
+    .case {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    #barreCtrl {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    #statutLat {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .panneauJoueurs {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+.panneauJoueurs {
+    width: 100%;
+    flex-direction: column;
+}
+
 .case {
-    background: radial-gradient(circle at 50% 50%, #0a0401 50%, #23130d 100%);
-    box-shadow: 
-        inset 6px 6px 18px rgba(0, 0, 0, 0.95), 
-        inset -3px -3px 12px rgba(255, 255, 255, 0.03),
-        0 4px 6px rgba(0, 0, 0, 0.4);
-    border: 2px solid #160b05;
-    position: relative;
-    padding:6px;
+    opacity: 0;
+    transform: translateX(105px) rotate(-200deg);
+    transition: all 2s ease-out;
+    animation: apparitionDouce 4s forwards;
+    scale: 2;
 }
 
-/* effet au survol */
+@keyframes apparitionDouce {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        scale: 1;
+    }
+}
+
+.case {
+    animation-delay: 0.5s;
+}
+
+#quitterJeu:hover {
+    scale: 1.2 !important;
+    transition-duration: 0.3s !important;
+}
+
 .case:hover {
-    transform: scale(1.03);
-    box-shadow: 
-        inset 4px 4px 12px rgba(0, 0, 0, 0.95), 
-        0 0 15px rgba(255, 159, 28, 0.5);
-    border-color: var(--accent);
+    scale: 1.2;
+    transform: translateX(3px);
+    transition-duration: 0.4s;
 }
-
-/* boules de songo (premiere bille) */
-.case::after {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: radial-gradient(circle at 35% 35%, #ffb703, #ff9f1c 50%, #7c4a02 100%);
-    border-radius: 50%;
-    bottom: 5px;
-    right: 12px;
-    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.9);
-}
-
-.txtScore { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }
-.txtScore span { font-size: 1.5rem; font-weight: 800; color: var(--text-light); }
